@@ -57,7 +57,6 @@ const Form: FC<FormProps> = ({ handleSubmit, initialState }) => {
     if (!state) return;
 
     if (state.ok) {
-      console.log("enter");
       const updatedMessages = await getMessages();
       setAllMessages(updatedMessages);
 
