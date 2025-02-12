@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  authDB:
+    image: postgres:17.2
+    container_name: messages-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
