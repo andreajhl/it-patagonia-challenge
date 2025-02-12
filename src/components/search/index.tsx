@@ -6,7 +6,7 @@ import { useGlobalContext } from "context";
 import { Input } from "@components/ui";
 
 const Search: FC = () => {
-  const { messages, setMessages } = useGlobalContext();
+  const { allMessages, setFilteredMessages } = useGlobalContext();
 
   const [searchQuery, setSearchQuery] = useState("");
   const deferredSearch = useDeferredValue(searchQuery);
@@ -17,7 +17,7 @@ const Search: FC = () => {
 
   const resetSearch = async () => {
     const messages = await getMessages();
-    setMessages(messages);
+    setFilteredMessages(messages);
   };
 
   useEffect(() => {
@@ -27,11 +27,11 @@ const Search: FC = () => {
     }
 
     const timeoutId = setTimeout(() => {
-      const filteredMessages = messages.filter(({ title }) =>
+      const filteredMessages = allMessages.filter(({ title }) =>
         title.toLowerCase().includes(deferredSearch),
       );
 
-      setMessages(filteredMessages);
+      setFilteredMessages(filteredMessages);
     }, 400);
 
     return () => clearTimeout(timeoutId);

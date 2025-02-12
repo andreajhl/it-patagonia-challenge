@@ -7,11 +7,11 @@ import Link from "next/link";
 import { FC } from "react";
 
 const Home: FC = () => {
-  const { messages, setMessages } = useGlobalContext();
+  const { filteredMessages, setAllMessages } = useGlobalContext();
 
   const updateMessages = async () => {
     const data = await getMessages();
-    setMessages(data);
+    setAllMessages(data);
   };
 
   const handleRemove = async (id: number) => {
@@ -37,7 +37,7 @@ const Home: FC = () => {
         </Link>
       </div>
       <ul className="mt-4 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {messages.map((message) => (
+        {filteredMessages.map((message) => (
           <li key={message.id} className="h-full w-full">
             <Message {...message} handleRemove={handleRemove} />
           </li>

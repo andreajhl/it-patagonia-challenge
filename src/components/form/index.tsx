@@ -5,6 +5,7 @@ import {
   FC,
   FocusEvent,
   useActionState,
+  useCallback,
   useEffect,
   useMemo,
   useState,
@@ -25,7 +26,7 @@ const defualtState = {
 const Form: FC<FormProps> = ({ handleSubmit, initialState }) => {
   const router = useRouter();
 
-  const { setMessages } = useGlobalContext();
+  const { setAllMessages } = useGlobalContext();
   const { setNotification } = useNotificationContext();
 
   const [state, action, pending] = useActionState(handleSubmit, undefined);
@@ -52,17 +53,23 @@ const Form: FC<FormProps> = ({ handleSubmit, initialState }) => {
     setMessageData((prev) => ({ ...prev, [name]: value }));
   };
 
-  useEffect(() => {
+  const handleStateUpdate = useCallback(async () => {
     if (!state) return;
 
-    if (!state.ok) {
-      setNotification({ type: "error", message: "Submission failed." });
-      return;
-    }
+    if (state.ok) {
+      console.log("enter");
+      const updatedMessages = await getMessages();
+      setAllMessages(updatedMessages);
 
-    getMessages().then((updateMessages) => setMessages(updateMessages));
-    router.push("/");
-  }, [state]);
+      router.push("/");
+    } else {
+      setNotification({ type: "error", message: "Submission failed." });
+    }
+  }, [state, setAllMessages, setNotification, router]);
+
+  useEffect(() => {
+    handleStateUpdate();
+  }, [handleStateUpdate]);
 
   return (
     <form

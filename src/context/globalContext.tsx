@@ -8,12 +8,15 @@ import {
   Dispatch,
   SetStateAction,
   FC,
+  useEffect,
 } from "react";
 import { Message } from "models";
 
 interface GlobalContextProps {
-  messages: Message[];
-  setMessages: Dispatch<SetStateAction<Message[]>>;
+  allMessages: Message[];
+  setAllMessages: Dispatch<SetStateAction<Message[]>>;
+  filteredMessages: Message[];
+  setFilteredMessages: Dispatch<SetStateAction<Message[]>>;
 }
 
 interface GlobalProviderProps {
@@ -27,10 +30,22 @@ export const GlobalProvider: FC<GlobalProviderProps> = ({
   children,
   initialData,
 }) => {
-  const [messages, setMessages] = useState<Message[]>(initialData);
+  const [allMessages, setAllMessages] = useState(initialData);
+  const [filteredMessages, setFilteredMessages] = useState(initialData);
+
+  useEffect(() => {
+    setFilteredMessages(allMessages);
+  }, [allMessages]);
 
   return (
-    <GlobalContext.Provider value={{ messages, setMessages }}>
+    <GlobalContext.Provider
+      value={{
+        allMessages,
+        setAllMessages,
+        filteredMessages,
+        setFilteredMessages,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

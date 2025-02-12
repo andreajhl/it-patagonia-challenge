@@ -42,8 +42,10 @@ beforeEach(() => {
   jest.clearAllMocks();
   (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
   (useGlobalContext as jest.Mock).mockReturnValue({
-    messages: mockMessages,
-    setMessages: mockSetMessages,
+    allMessages: mockMessages,
+    setAllMessages: mockSetMessages,
+    filteredMessages: mockMessages,
+    setFilteredMessages: mockSetMessages,
   });
 });
 
