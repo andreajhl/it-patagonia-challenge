@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer utilities {
+  .no-autofill {
+    @apply bg-transparent;
+  }
+
+  input:-webkit-autofill {
+    @apply no-autofill;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-md bg-blue-600 px-5 py-2 font-normal text-white shadow-md hover:bg-blue-700 focus:outline-none active:bg-blue-800 disabled:pointer-events-none disabled:bg-gray-400;
+  }
+
+  .btn-secondary {
+    @apply rounded-md bg-white px-5 py-2 font-normal text-blue-600 shadow-md hover:text-blue-700 focus:outline-none active:bg-gray-50;
+  }
+
+  .input-outline {
+    @apply mt-0 block w-full appearance-none rounded-md border border-gray-300 bg-white p-3 focus:border-gray-400 focus:outline-none focus:ring-0 xl:rounded-lg;
+  }
+
+  .input-password-outline {
+    @apply mt-0 block w-full appearance-none border-none p-0 focus:border-none focus:outline-none;
+  }
+
+  .input-label {
+    @apply pointer-events-none absolute left-2 top-2 z-10 origin-center bg-white px-3 text-gray-500 duration-300;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply rounded bg-slate-100;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded bg-blue-400;
+  }
+
+  input:focus ~ label,
+  input:placeholder-shown ~ label,
+  input:not([value=""]) ~ label,
+  textarea:focus ~ label,
+  textarea:placeholder-shown ~ label,
+  textarea:not([value=""]) ~ label {
+    @apply -top-3 left-0 scale-75 transform;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
