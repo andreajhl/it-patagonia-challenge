@@ -45,15 +45,17 @@ export const createMessage: CreateMessage = async (_, formData) => {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
 
-    return await prisma.message.create({
+    await prisma.message.create({
       data: {
         title,
         content,
       },
     });
+
+    return { ok: true };
   } catch (error) {
     console.log("Error create message: ", error);
-    return {};
+    return { ok: false };
   }
 };
 
@@ -62,7 +64,7 @@ export const updateMessage: UpdateMessage = async (messageID, _, formData) => {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
 
-    return await prisma.message.update({
+    await prisma.message.update({
       where: {
         id: Number(messageID),
       },
@@ -71,21 +73,25 @@ export const updateMessage: UpdateMessage = async (messageID, _, formData) => {
         content,
       },
     });
+
+    return { ok: true };
   } catch (error) {
     console.log("Error update message: ", error);
-    return;
+    return { ok: false };
   }
 };
 
 export const deleteMessage: DeleteMessage = async (messageID) => {
   try {
-    return await prisma.message.delete({
+    await prisma.message.delete({
       where: {
         id: Number(messageID),
       },
     });
+
+    return { ok: true };
   } catch (error) {
     console.log("Error remove message: ", error);
-    return {};
+    return { ok: false };
   }
 };

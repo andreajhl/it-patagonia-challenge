@@ -9,13 +9,13 @@ export interface GetMessageByID {
 }
 
 export interface CreateMessage {
-  (_: any, formData: FormData): Promise;
+  (_: any, formData: FormData): Promise<{ ok: boolean }>;
 }
 
 export interface UpdateMessage {
-  (messageID: string, _: any, formData: FormData): Promise<Message | undefined>;
+  (messageID: string, _: any, formData: FormData): Promise<{ ok: boolean }>;
 }
 
 export interface DeleteMessage {
-  (messageID: number): Promise;
+  (messageID: number): Promise<{ ok: boolean }>;
 }

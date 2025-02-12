@@ -53,7 +53,9 @@ const Form: FC<FormProps> = ({ handleSubmit, initialState }) => {
   };
 
   useEffect(() => {
-    if (!state) {
+    if (!state) return;
+
+    if (!state.ok) {
       setNotification({ type: "error", message: "Submission failed." });
       return;
     }
