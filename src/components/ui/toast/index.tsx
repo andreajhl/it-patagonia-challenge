@@ -15,7 +15,7 @@ const Toast: FC<ToastProps> = () => {
   const resetNotification = () => {
     setTimeout(() => {
       setShow(false);
-      setTimeout(() => setNotification({}), 300);
+      setNotification({});
     }, delay);
   };
 
