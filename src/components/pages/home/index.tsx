@@ -1,7 +1,5 @@
 "use client";
 
-import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import { deleteMessage, getMessages } from "@actions/index";
 import Message from "@components/menssage";
 import { useGlobalContext } from "context";
@@ -35,8 +33,7 @@ const Home: FC = () => {
           aria-label="Go to create message"
           className="flex items-center gap-1 text-xs text-gray-400 md:text-sm lg:text-base"
         >
-          <i className="fa-regular fa-plus" />
-          message
+          Add message
         </Link>
       </div>
       <ul className="mt-4 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

@@ -43,7 +43,7 @@ export default async function RootLayout({
         <NotificationProvider>
           <GlobalProvider initialData={messages || []}>
             <Navbar />
-            <main className="lg:px-18 relative flex min-h-screen w-full flex-col items-center px-8 pb-10 pt-24 md:px-14 md:pt-28">
+            <main className="relative flex min-h-screen w-full max-w-7xl flex-col items-center px-8 pb-10 pt-24 md:px-14 md:pt-28 lg:px-16">
               {children}
               <Toast />
             </main>
