@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono as GeistMono } from "next/font/google";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { NotificationProvider } from "context";
 import { getMessages } from "@actions/index";
 import { GlobalProvider } from "context";
